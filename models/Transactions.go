@@ -1,10 +1,10 @@
 package models
 
 type Transaction struct {
-	Id       int
-	Currency string
-	Price    float64
-	Issuer    string
-	Receiver string
-	Date     string
+	Id       int     `json:"id"`
+	Currency string  `json:"currency"`
+	Price    float64 `json:"price"`
+	Issuer   string  `json:"issuer"`
+	Receiver string  `json:"receiver"`
+	Date     string  `json:"date"`
 }
