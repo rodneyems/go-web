@@ -7,7 +7,11 @@ import (
 
 func main() {
 	router := gin.Default()
+	group := router.Group("/transactions")
+	{
+		group.GET("/", controllers.GetAllTransactions)
+		group.POST("/:id")
+	}
 	router.GET("/greetings", )
-	router.GET("/transactions", controllers.GetAllTransactions)
 	router.Run()
 }
