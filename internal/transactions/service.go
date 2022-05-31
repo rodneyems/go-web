@@ -10,6 +10,7 @@ type Service interface {
 	Save(currency string, issuer string, receiver string, date string, price float64) (transaction, error)
 	Update(id int, currency string, issuer string, receiver string, date string, price float64) (transaction, error)
 	Delete(id int) error
+	UpdateFields(id int, issuer string, price float64) (transaction, error)
 }
 
 type service struct {
@@ -50,4 +51,12 @@ func (s *service) Delete(id int) error {
 		return errors.New("id inválido")
 	}
 	return nil
+}
+
+func (s *service) UpdateFields(id int, issuer string, price float64) (transaction, error) {
+	tUpdated, err := s.repository.UpdateFields(id, issuer, price)
+	if err != nil {
+		return tUpdated, errors.New(err.Error())
+	}
+	return tUpdated, nil
 }

@@ -10,6 +10,7 @@ type Repository interface {
 	Update(t transaction) (transaction, error)
 	LastId() (int, error)
 	Delete(id int) error
+	UpdateFields(id int, issuer string, price float64) (transaction, error)
 }
 
 type repository struct{}
@@ -53,4 +54,16 @@ func (r *repository) Delete(id int) error {
 		}
 	}
 	return errors.New("id inválido")
+}
+
+func (r *repository) UpdateFields(id int, issuer string, price float64) (transaction, error) {
+
+	for i := range transactions {
+		if transactions[i].Id == id {
+			transactions[i].Issuer = issuer
+			transactions[i].Price = price
+			return transactions[i], nil
+		}
+	}
+	return transaction{}, errors.New("id inválido")
 }
