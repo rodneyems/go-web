@@ -68,6 +68,7 @@ func (t Transaction) Store() gin.HandlerFunc {
 		})
 	}
 }
+
 func (t Transaction) Update() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.GetHeader("token") != "1234567890" {
@@ -104,6 +105,34 @@ func (t Transaction) Update() gin.HandlerFunc {
 		}
 		c.JSON(http.StatusCreated, gin.H{
 			"data": t,
+		})
+	}
+}
+
+func (t Transaction) Delete() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if c.GetHeader("token") != "1234567890" {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"message": "não autorizado",
+			})
+			return
+		}
+		id, err := strconv.Atoi(c.Param("id")) 
+		if err != nil {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"message": "id inválido",
+			})
+			return
+		}
+		err = t.service.Delete(id)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": err.Error(),
+			})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{
+			"message": "item removido",
 		})
 	}
 }
