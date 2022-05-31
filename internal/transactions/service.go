@@ -14,7 +14,8 @@ func NewService(r Repository) Service {
 }	
 
 func (s *service) GetAll() ([]transaction, error) {
-	return transactions, nil
+	data, _ := s.repository.GetAll()
+	return data, nil
 }
 
 func (s *service) Save(currency string, issuer string, receiver string, date string, price float64) (transaction, error) {
