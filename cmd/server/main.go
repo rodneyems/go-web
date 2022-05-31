@@ -15,6 +15,7 @@ func main() {
 	{
 		group.GET("/", t.GetAll())
 		group.POST("/", t.Store())
+		group.PUT("/:id", t.Update())
 	}
 
 	router.Run()
