@@ -12,8 +12,6 @@ import (
 	"github.com/rodneyems/go-web/internal/transactions"
 )
 
-var TOKEN string = os.Getenv("TOKEN")
-
 type request struct {
 	Currency string  `json:"currency" binding:"required"`
 	Price    float64 `json:"price" binding:"required"`
@@ -39,7 +37,7 @@ func NewTransaction(t transactions.Service) *Transaction {
 
 func (t Transaction) GetAll() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != TOKEN {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -52,7 +50,7 @@ func (t Transaction) GetAll() gin.HandlerFunc {
 
 func (t Transaction) Store() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != TOKEN {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -79,7 +77,7 @@ func (t Transaction) Store() gin.HandlerFunc {
 
 func (t Transaction) Update() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != TOKEN {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -119,7 +117,7 @@ func (t Transaction) Update() gin.HandlerFunc {
 
 func (t Transaction) Delete() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != TOKEN {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -147,7 +145,7 @@ func (t Transaction) Delete() gin.HandlerFunc {
 
 func (t Transaction) UpdateFields() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != TOKEN {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
