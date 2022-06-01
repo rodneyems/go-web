@@ -28,10 +28,7 @@ func (s *service) GetAll() ([]transaction, error) {
 
 func (s *service) Save(currency string, issuer string, receiver string, date string, price float64) (transaction, error) {
 	id, _ := s.repository.LastId()
-	id++
-	t := transaction{id, currency, price, issuer, receiver, date}
-	lastId = t.Id
-	transactions = append(transactions, t)
+	t, _ := s.repository.Save(id, currency, issuer, receiver, date, price)
 	return t, nil
 }
 

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -20,8 +21,8 @@ type request struct {
 }
 
 type requestPatch struct {
-	Price    float64 `json:"price" binding:"required"`
-	Issuer   string  `json:"issuer" binding:"required"`
+	Price  float64 `json:"price" binding:"required"`
+	Issuer string  `json:"issuer" binding:"required"`
 }
 
 type Transaction struct {
@@ -36,7 +37,7 @@ func NewTransaction(t transactions.Service) *Transaction {
 
 func (t Transaction) GetAll() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != "1234567890" {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -49,7 +50,7 @@ func (t Transaction) GetAll() gin.HandlerFunc {
 
 func (t Transaction) Store() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != "1234567890" {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -76,7 +77,7 @@ func (t Transaction) Store() gin.HandlerFunc {
 
 func (t Transaction) Update() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != "1234567890" {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -94,7 +95,7 @@ func (t Transaction) Update() gin.HandlerFunc {
 				return
 			}
 		}
-		id, err := strconv.Atoi(c.Param("id")) 
+		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "id inválido",
@@ -116,13 +117,13 @@ func (t Transaction) Update() gin.HandlerFunc {
 
 func (t Transaction) Delete() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != "1234567890" {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
 			return
 		}
-		id, err := strconv.Atoi(c.Param("id")) 
+		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "id inválido",
@@ -144,7 +145,7 @@ func (t Transaction) Delete() gin.HandlerFunc {
 
 func (t Transaction) UpdateFields() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.GetHeader("token") != "1234567890" {
+		if c.GetHeader("token") != os.Getenv("TOKEN") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "não autorizado",
 			})
@@ -162,7 +163,7 @@ func (t Transaction) UpdateFields() gin.HandlerFunc {
 				return
 			}
 		}
-		id, err := strconv.Atoi(c.Param("id")) 
+		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "id inválido",

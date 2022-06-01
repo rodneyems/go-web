@@ -1,8 +1,5 @@
 package transactions
 
-var transactions []transaction
-var lastId int
-
 type transaction struct {
 	Id       int     `json:"id"`
 	Currency string  `json:"currency" binding:"required"`
