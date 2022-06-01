@@ -1,9 +1,9 @@
-package models
+package transactions
 
-var Transactions []Transaction
-var LastId int
+var transactions []transaction
+var lastId int
 
-type Transaction struct {
+type transaction struct {
 	Id       int     `json:"id"`
 	Currency string  `json:"currency" binding:"required"`
 	Price    float64 `json:"price" binding:"required"`
