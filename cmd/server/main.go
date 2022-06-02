@@ -8,6 +8,8 @@ import (
 	"github.com/rodneyems/go-web/pkg/store"
 )
 
+//@title MELI BOOTCAMP
+//@version 1.0
 func main() {
 	_ = godotenv.Load()
 	store := store.New(store.FileType, "./pkg/store/file.json")

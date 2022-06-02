@@ -1,0 +1,36 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "MELI BOOTCAMP",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/transactions": {
+            "get": {
+                "description": "Exibe todas as transacões cadastradas no sistema",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Exibe todas as transações",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "400": {
+                        "description": ""
+                    },
+                    "404": {
+                        "description": ""
+                    },
+                    "500": {
+                        "description": ""
+                    }
+                }
+            }
+        }
+    }
+}

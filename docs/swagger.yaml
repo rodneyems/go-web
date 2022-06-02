@@ -1,0 +1,23 @@
+info:
+  contact: {}
+  title: MELI BOOTCAMP
+  version: "1.0"
+paths:
+  /transactions:
+    get:
+      description: Exibe todas as transacões cadastradas no sistema
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: ""
+        "404":
+          description: ""
+        "500":
+          description: ""
+      summary: Exibe todas as transações
+      tags:
+      - Transactions
+swagger: "2.0"

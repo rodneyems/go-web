@@ -12,6 +12,8 @@ import (
 	"github.com/rodneyems/go-web/internal/transactions"
 )
 
+// swagger embed files
+
 type request struct {
 	Currency string  `json:"currency" binding:"required"`
 	Price    float64 `json:"price" binding:"required"`
@@ -35,6 +37,16 @@ func NewTransaction(t transactions.Service) *Transaction {
 	}
 }
 
+// Exibe Todas godoc
+// @Summary      Exibe todas as transações
+// @Description  Exibe todas as transacões cadastradas no sistema
+// @Tags         Transactions
+// @Produce      json
+// @Success      200
+// @Failure      400
+// @Failure      404
+// @Failure      500
+// @Router       /transactions [get]
 func (t Transaction) GetAll() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.GetHeader("token") != os.Getenv("TOKEN") {
