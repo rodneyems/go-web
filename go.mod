@@ -35,6 +35,7 @@ require (
 	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2 // indirect
 	github.com/swaggo/gin-swagger v1.4.3 // indirect
 	github.com/swaggo/swag v1.8.2 // indirect
+	github.com/swaggo/swag/example/celler v0.0.0-20220524052142-67cb7684c8ad
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	github.com/urfave/cli/v2 v2.8.1 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
