@@ -1,0 +1,289 @@
+basePath: /api/v1
+definitions:
+  cmd_server_handler.request:
+    properties:
+      currency:
+        type: string
+      date:
+        type: string
+      issuer:
+        type: string
+      price:
+        type: number
+      receiver:
+        type: string
+    required:
+    - currency
+    - date
+    - issuer
+    - price
+    - receiver
+    type: object
+  cmd_server_handler.requestPatch:
+    properties:
+      issuer:
+        type: string
+      price:
+        type: number
+    required:
+    - issuer
+    - price
+    type: object
+  github.com_rodneyems_go-web_cmd_server_handler.request:
+    properties:
+      currency:
+        type: string
+      date:
+        type: string
+      issuer:
+        type: string
+      price:
+        type: number
+      receiver:
+        type: string
+    required:
+    - currency
+    - date
+    - issuer
+    - price
+    - receiver
+    type: object
+  github.com_rodneyems_go-web_cmd_server_handler.requestPatch:
+    properties:
+      issuer:
+        type: string
+      price:
+        type: number
+    required:
+    - issuer
+    - price
+    type: object
+  httputil.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  transactions.transaction:
+    properties:
+      currency:
+        type: string
+      date:
+        type: string
+      id:
+        type: integer
+      issuer:
+        type: string
+      price:
+        type: number
+      receiver:
+        type: string
+    required:
+    - currency
+    - date
+    - issuer
+    - price
+    - receiver
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: rodney.martins@live.com
+    name: Rodney Martins
+    url: https://www.linkedin.com/in/rodney-martins
+  description: API para gerencia de transações.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: MELI GO BOOTCAMP
+  version: "1.0"
+paths:
+  /transactions:
+    get:
+      description: Exibe todas as transacões cadastradas no sistema
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/transactions.transaction'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Exibe todas as transações
+      tags:
+      - Transactions
+    post:
+      description: Cria uma nova transação e retorna o objeto criado
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: transaction
+        in: body
+        name: Transaction
+        required: true
+        schema:
+          $ref: '#/definitions/cmd_server_handler.request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transactions.transaction'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Cria uma nova transação no sistema
+      tags:
+      - Transactions
+  /transactions/{id}:
+    delete:
+      description: Deleta uma transação do sistema
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: transaction ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Deleta uma transação do sistema
+      tags:
+      - Transactions
+    patch:
+      description: Atualiza campos de uma transação e retorna o objeto atualizado
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: transaction ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: transaction
+        in: body
+        name: Transaction
+        required: true
+        schema:
+          $ref: '#/definitions/cmd_server_handler.requestPatch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transactions.transaction'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Atualiza campos de uma transação no sistema
+      tags:
+      - Transactions
+    put:
+      description: Atualiza uma nova e retorna o objeto atualizado
+      parameters:
+      - description: token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: transaction ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: transaction
+        in: body
+        name: Transaction
+        required: true
+        schema:
+          $ref: '#/definitions/cmd_server_handler.request'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/transactions.transaction'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.HTTPError'
+      summary: Atualiza uma nova transação no sistema
+      tags:
+      - Transactions
+swagger: "2.0"
